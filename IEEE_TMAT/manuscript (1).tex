@@ -1,0 +1,1058 @@
+%=======================================================================
+%  Interfacial Charge Relaxation Governs the Capacitive Memory Window
+%  in Ferroelectric Hf0.5Zr0.5O2 Capacitors
+%
+%  IEEE journal format (IEEEtran).  For IEEE Electron Device Letters use
+%  \documentclass[journal]{IEEEtran} and observe the 3-page limit; for
+%  IEEE TED / JEDS the present length is appropriate.
+%
+%  Required figure files in the same directory:
+%     Fig1.png  Fig2.png  Fig3.png  Fig4.png  Fig5.png
+%=======================================================================
+\documentclass[journal]{IEEEtran}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+% ---- convenience macros -----------------------------------------------
+\newcommand{\hzo}{Hf$_{0.5}$Zr$_{0.5}$O$_{2}$}
+\newcommand{\xir}{\xi_{r}}
+\newcommand{\CMW}{\mathrm{CMW}}
+\newcommand{\fc}{f_{c}}
+\newcommand{\Ecross}{E_{\mathrm{cross}}}
+\newcommand{\uCcm}{\,$\mu$C/cm$^{2}$}
+\newcommand{\MVcm}{\,MV/cm}
+
+\begin{document}
+
+\title{Interfacial Charge Relaxation Governs the Capacitive Memory Window
+in Ferroelectric \hzo{} Capacitors}
+
+\author{Apu~Das,
+        and~Sourav~De,~\IEEEmembership{Senior~Member,~IEEE}
+\thanks{The authors are with the College of Semiconductor Research,
+National Tsing Hua University, Hsinchu 300044, Taiwan
+(e-mail: apudas@nthu.edu.tw; sourav.de@mx.nthu.edu.tw).}
+\thanks{Manuscript received XX XXXX; revised XX XXXX.}}
+
+
+
+\maketitle
+
+%=======================================================================
+\begin{abstract}
+The capacitive memory window (CMW) enables non-destructive readout (NDRO)
+in ferroelectric capacitors, but what sets its limits has remained
+unresolved. We show that although the polarization defines the two states,
+the zero-bias CMW that distinguishes them is gated by an interfacial charge
+layer. In TaN/\hzo{}/TiN capacitors the CMW rolls off as a single Debye
+relaxation, $\fc = 179$~kHz, with Kramers--Kronig closure to 2\%; no
+component survives on the ferroelectric's own timescale. At 10~K the corner
+falls below 1~kHz while switching persists. Two stacks sharing the same
+dielectric ceiling relax $126\times$ apart, and a series extraction shows
+their interfacial layers differ by 26\% in areal capacitance but
+$157\times$ in areal resistance---the read speed is set by interfacial
+conductivity, not thickness. The NDRO read band is therefore bounded by an
+interface-determined $\fc(T)$ varying two decades between stacks, making
+single-frequency CMW values non-portable.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Ferroelectric capacitor, hafnium zirconium oxide, capacitive memory window,
+non-destructive readout, dielectric relaxation, Maxwell--Wagner, interfacial
+layer, PUND, cryogenic memory.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+%=======================================================================
+\section{Introduction}
+%=======================================================================
+\IEEEPARstart{F}{erroelectricity} in doped HfO$_2$~\cite{boscke2011} and
+\hzo{}~\cite{muller2012} has reopened the prospect of scalable ferroelectric
+memory: unlike the perovskites it displaces, \hzo{} is CMOS- and
+BEOL-compatible, retains polarization in films only a few nanometres thick,
+and is deposited by conformal ALD~\cite{cho2024beol,schroeder2022}.
+Ferroelectric capacitors (FeCaps) and field-effect transistors (FeFETs) built
+on this material are advanced candidates for embedded non-volatile memory,
+storage-class memory, and in-memory and neuromorphic
+computing~\cite{paul2025review,sunil2024cam,das2026cryo,sk2025stdp}.
+
+The conventional readout of a FeCap is destructive. Sensing the switched
+charge $2P_r$ requires driving the cell through its coercive field,
+destroying the stored state and mandating a write-back---costing energy,
+latency, and one cycle of the device's finite endurance budget. This penalty
+is worst for read-dominated workloads and for in-memory computing, where the
+same weights are interrogated repeatedly.
+
+A capacitive read removes it. Because the small-signal permittivity of a
+poled ferroelectric depends on which remanent state it occupies, the two
+states can be distinguished by a low-amplitude, sub-coercive capacitance
+measurement that leaves the polarization undisturbed. The difference between
+the two state permittivities---the capacitive memory window (CMW)---is the
+read quantity of NDRO FeRAM and of capacitor-based in-memory computing, where
+a state-dependent capacitance directly weights accumulated
+charge~\cite{mukherjee2023edl,mukherjee2023iedm,mukherjee2024iedm,lee2025aem}.
+The non-volatile small-signal capacitance underlying this readout has been
+documented in \hzo{} capacitors~\cite{luo2020}.
+
+Work on this scheme has concentrated almost exclusively on enlarging the
+window, and two opposing design philosophies have emerged. The first
+deliberately engineers an asymmetry between the two ferroelectric/metal
+interfaces so that a finite window exists at zero applied bias, reporting CMW
+rising from $\approx 4.7$ to a record 8.7 with read endurance beyond
+$10^{11}$ cycles~\cite{mukherjee2023edl,mukherjee2023iedm}, later enhanced
+with a semiconducting IGZO interlayer and demonstrated in a 3D
+architecture~\cite{mukherjee2024iedm,mukherjee2025edl}. The attraction is
+circuit simplicity: a zero-bias read requires no bias generator, no
+per-device read-voltage calibration, and carries no risk that the read bias
+itself disturbs the state or injects leakage. The second keeps the
+metal--ferroelectric--metal stack deliberately symmetric---which by
+construction yields no zero-bias window---and opens the window with a
+sub-coercive read bias $V_R < V_c$, on the explicit argument that built-in
+asymmetry raises reliability and device-to-device variability
+concerns~\cite{lee2025aem}. Both have been demonstrated at array level, and
+both quote a CMW measured at a single frequency near room temperature.
+
+What neither establishes is \emph{what governs} the window. The controlling
+physics is left implicit, and with it the operating limits: usable read
+bandwidth, temperature range, and stability of the read margin. This is
+decisive rather than academic. If the window is limited by the ferroelectric
+layer it inherits that layer's
+robustness~\cite{pesic2016,schenk2014,grimley2016}; if it is limited by
+interfacial charge, its bandwidth and temperature range are governed by
+space-charge and trap dynamics, which are neither as fast nor as stable and
+which vary strongly with electrode and interfacial chemistry.
+
+A symmetry argument shows the polarization alone cannot be the answer. The
+polarization is \emph{necessary}, since it defines the two states; without
+ferroelectric switching there is no stored bit. It is not \emph{sufficient}:
+for an ideally symmetric capacitor the small-signal permittivity is an even
+function of the polarization state, $\xi(+P_r) = \xi(-P_r)$, so the two
+$C$--$V$ branches intersect at zero bias and $\CMW \equiv 0$
+\emph{regardless of the magnitude of} $2P_r$. A finite zero-bias window does
+not follow from having a large polarization---it requires an asymmetry
+between the two states. This is implicit in the need to engineer interfacial
+asymmetry to open a window~\cite{mukherjee2023edl,mukherjee2023iedm}, and in
+the absence of a zero-bias window in symmetric stacks~\cite{lee2025aem}. The
+questions addressed here are what that asymmetry is, and what governs the
+window's dynamics.
+
+There is strong independent reason to suspect the interfacial layer. In \hzo{}
+capacitors, an oxygen-deficient interfacial region forms unavoidably against
+nitride electrodes: TiN and TaN scavenge oxygen from the film during
+deposition and annealing, forming TiO$_x$N$_y$ or TaO$_x$N$_y$ and generating
+oxygen vacancies in the adjacent
+\hzo{}~\cite{kim2023vacancy,segantini2023strain,koroleva2022}. Systematic
+comparison across nitride, metal and oxide electrodes identifies this
+electrode--ferroelectric interface as the \emph{primary} constraint on
+endurance and retention, with impedance spectroscopy of 10~nm \hzo{}
+capacitors resolving distinct interface and bulk RC elements whose
+resistances differ by more than five orders of
+magnitude~\cite{alcala2023}. The same interfacial region drives the wake-up
+transformation and the accompanying
+imprint~\cite{pesic2016,schenk2014,grimley2016,schenk2014apr,li2024imprint},
+and interfacial-layer soft breakdown has been proposed as its microscopic
+mechanism in ultrathin \hzo{}~\cite{cho2024wakeup,de2024tradeoff}. Vacancy
+distribution and phase composition in scaled \hzo{} capacitors have been
+mapped directly~\cite{iung2025,kumar2025review}, and charge-pumping analyses
+show interface-trap accumulation, rather than intrinsic ferroelectric
+fatigue, dominates endurance degradation in HfO$_2$
+FeFETs~\cite{rana2025cp,raffel2025,senapati2025}. Most directly, examination
+of the same electrically degraded gate stack after memory-window closure
+shows robust polarization switching is preserved, establishing that the loss
+of device functionality is
+interface-driven~\cite{das2026paradox,das2025sisc}. Interface engineering is
+correspondingly the principal lever on FeCap reliability: the engineered
+WO$_x$/\hzo{}/PEALD-TiN stack studied here as Stack~B achieves endurance
+beyond $2\times10^{10}$ cycles~\cite{paul2026wox}.
+
+If the interfacial layer governs wake-up, imprint and endurance, it is
+natural to ask whether it also governs the capacitive read. The two candidate
+pictures make opposing, testable predictions. If the window is
+\emph{ferroelectric-limited}---arising from the field-dependent dielectric
+response of the ferroelectric itself, as in Landau or domain-wall treatments
+of the butterfly $C$--$V$~\cite{lee2025aem,tagantsev2002,segantini2022ti}---it
+should relax on the ferroelectric's own timescale, which persists into the
+GHz range~\cite{kim2023impedance}, be insensitive to the electrode stack, and
+show the broadening characteristic of a distribution of pinning
+energies~\cite{jonscher1977,jonscher1983}. If it is
+\emph{interface-limited}, it should exhibit a single relaxation whose time
+constant is set by the interfacial layer alone, change with the stack, and
+freeze on cooling while the polarization remains operational.
+
+We resolve which holds using frequency-resolved $C$--$V$ spectroscopy from
+1~kHz to 4~MHz on two stacks, with PUND and switching-current measurements at
+300~K and 10~K.
+
+%=======================================================================
+\section{Device Fabrication and Measurement}
+%=======================================================================
+
+\subsection{Device Stacks}
+Two metal--ferroelectric--metal capacitors were compared
+[Fig.~\ref{fig:stacks}(a)]. \textbf{Stack~A} is
+TaN(120~nm)/\hzo{}(10~nm)/TiN(50~nm) on Si. \textbf{Stack~B} is
+PE-TiN/TiN/\hzo{}/WO$_x$/W on Si, incorporating a tungsten-oxide interfacial
+layer between the ferroelectric and the bottom electrode~\cite{paul2026wox}.
+\hzo{} was deposited by ALD and crystallized into the polar orthorhombic
+phase by rapid thermal annealing with the top electrode present, providing
+the mechanical constraint required for metastable phase stabilization, at a
+BEOL-compatible thermal budget ($<400\,^\circ$C)~\cite{cho2024beol}. Phase
+composition was verified by grazing-incidence XRD [Fig.~\ref{fig:stacks}(b)].
+
+Neither stack contains a deliberately deposited interfacial layer at its
+nitride contacts. However, an oxygen-deficient interfacial region forms
+unavoidably at nitride/\hzo{} interfaces during deposition and
+crystallization, as TiN and TaN scavenge oxygen from the
+film~\cite{kim2023vacancy,segantini2023strain,koroleva2022,alcala2023}. In
+Stack~A the two electrodes are chemically dissimilar (TaN and TiN), so the two
+interfacial regions differ, providing the asymmetry required for a finite
+zero-bias window; in Stack~B the asymmetry is set deliberately by the WO$_x$
+layer~\cite{paul2026wox}.
+
+\subsection{Small-Signal $C$--$V$ Spectroscopy}
+$C$--$V$ characteristics were measured in parallel ($C_p$--$R_p$) mode using
+an LCR meter with a 50~mV rms small-signal amplitude, at 61 logarithmically
+spaced frequencies from 1~kHz to 4~MHz. The DC bias was swept
+$-2$~V~$\rightarrow +2$~V~$\rightarrow -2$~V to traverse both polarization
+branches in a single acquisition, so that the branch reached after negative
+poling ($\xi_\uparrow$) and after positive poling ($\xi_\downarrow$) are
+recorded under identical conditions.
+
+The effective relative permittivity was obtained from the measured parallel
+capacitance as
+\begin{equation}
+\xir(V,f) \;=\; \frac{C_p(V,f)\,d}{\varepsilon_0 A} \;=\; \frac{C_p(V,f)}{C_0}
+\label{eq:eps}
+\end{equation}
+with $d$ the \hzo{} thickness, $A$ the capacitor area, and
+$C_0 = \varepsilon_0 A/d$ the geometric capacitance. For Stack~A,
+$C_0 = 15.0$~pF.
+
+For each frequency the two branches were separated by the sign of $dV/dt$ and
+interpolated to zero bias, giving $\xi_\uparrow(0)$ and $\xi_\downarrow(0)$.
+The capacitive memory window and the crossing field are defined as
+\begin{equation}
+\CMW_\xi(f) = \xi_\downarrow(0,f) - \xi_\uparrow(0,f),
+\qquad
+\xi_\downarrow(\Ecross) = \xi_\uparrow(\Ecross)
+\label{eq:cmw}
+\end{equation}
+$\Ecross$ being the field at which the two branches intersect and the states
+become capacitively indistinguishable.
+
+The differential dielectric loss was obtained from the measured branch
+conductances $G = 1/R_p$, again referenced to the geometric capacitance:
+\begin{equation}
+\Delta\xi''(f) \;=\; \frac{G_\downarrow(0,f) - G_\uparrow(0,f)}{\omega\,C_0},
+\qquad \omega = 2\pi f
+\label{eq:loss}
+\end{equation}
+Because \eqref{eq:loss} uses the conductance channel while \eqref{eq:cmw}
+uses the capacitance channel, the real and imaginary parts of the
+differential response are determined independently, permitting a
+Kramers--Kronig consistency test~\cite{nicollian1982,schroder2006}. The same
+conductance-based approach is used to quantify ferroelectric/dielectric
+interface traps~\cite{li2021traps}.
+
+\subsection{Series-Resistance De-Embedding}
+Above $\sim$1~MHz the measured response is dominated by the fixture and
+electrode resistance rather than by the dielectric. The apparent parallel
+capacitance of a series $R_s$--$L$--$C$ network is
+\begin{equation}
+C_{p,\mathrm{meas}}(f) \;=\; \frac{1}{\omega}\,
+\mathrm{Im}\!\left[\frac{1}{R_s + j\omega L + (j\omega C)^{-1}}\right]
+\label{eq:rlc}
+\end{equation}
+Fitting \eqref{eq:rlc} to the 0.8--4~MHz data of Stack~A gives
+$R_s = 267\,\Omega$, $L = 14\,\mu$H and $C = 329$~pF, placing the RC corner
+at $f_{RC} = 1/(2\pi R_s C) = 1.81$~MHz and the LC resonance at
+$f_0 = 1/(2\pi\sqrt{LC}) = 2.34$~MHz, against a measured zero crossing of the
+apparent permittivity at 2.44~MHz. The fractional error in $C_p$ from series
+resistance is $(\omega R_s C)^2$, which equals 0.010 at $\fc$ and 0.076 at
+500~kHz; all main-text analysis is therefore restricted to $f \le 500$~kHz.
+
+\subsection{PUND and Switching-Current Measurements}
+Polarization was measured by the positive-up-negative-down (PUND) sequence,
+in which a preset pulse is followed by two positive pulses (P, U) and two
+negative pulses (N, D). The first pulse of each polarity switches the
+polarization and the second does not, so subtracting the two removes the
+non-switching dielectric and leakage contributions:
+\begin{equation}
+2P_r \;=\; \frac{1}{A}\int \left[I_P(t) - I_U(t)\right]\,dt
+\label{eq:pund}
+\end{equation}
+Triangular sweeps with a half-period $T_{pw} = 500\,\mu$s were used for the
+switching-current characteristics of Fig.~\ref{fig:temperature}(a); the
+switching current is the difference between the switching and non-switching
+branches, $I_{sw} = I_P - I_U$. Coercive voltages were extracted from the
+zero crossings of $P(V)$ on each branch, and the loop imprint from their
+midpoint:
+\begin{equation}
+\begin{aligned}
+&P(V_c^{\pm}) = 0, \qquad
+V_{\mathrm{imp}} = \tfrac{1}{2}\left(V_c^{+} + V_c^{-}\right),\\[2pt]
+&E_c = \tfrac{1}{2}\left(|V_c^{+}| + |V_c^{-}|\right)\big/ d
+\end{aligned}
+\label{eq:coercive}
+\end{equation}
+Switching kinetics were characterized by a pulse-width series, applying
+rectangular write pulses of amplitude $V_R = \pm2$~V and width
+10~$\mu$s--1~ms and reading $2P_r$ by PUND after each write.
+
+\subsection{Cryogenic Measurement}
+Low-temperature measurements were performed in a closed-cycle helium
+cryogenic probe station. The sample stage was cooled by a Gifford--McMahon
+helium compressor to a base temperature of 10~K under vacuum, with the
+temperature stabilized to within $\pm0.1$~K and a dwell of at least 30~min
+before each measurement to ensure thermal equilibrium of the probe arms.
+Identical probes, cabling and instrument ranges were used at 300~K and 10~K
+so that the two datasets are directly comparable; in particular, the series
+resistance obtained above applies to both.
+
+\subsection{Model Fitting}
+The window and its loss were fitted to the two-component Debye form of
+Section~\ref{sec:debye} by non-linear least squares. Fit windows were
+$f \le 600$~kHz for Stack~A and $f \le 20$~kHz for Stack~B for the CMW, and
+$f \le 300$~kHz and $f \le 30$~kHz respectively for the peak permittivity,
+chosen to exclude the series-resistance-affected region. The Cole--Cole locus
+was fitted over 30--300~kHz by a circular arc constrained to pass through the
+origin, since $\Delta\xi'$ and $\Delta\xi''$ both vanish as
+$f \rightarrow \infty$; the depression angle $\alpha$ and the Cole--Cole
+exponent are related by $\beta = 1 - 2\alpha/\pi$.
+
+%=======================================================================
+\section{Results and Discussion}
+%=======================================================================
+
+\subsection{The Capacitive Memory Window and Its Frequency Collapse}
+GIXRD [Fig.~\ref{fig:stacks}(b)] shows the dominant polar orthorhombic
+reflection near $2\theta \approx 30.4^\circ$ with a residual monoclinic
+contribution near $28.5^\circ$, confirming both films as ferroelectric
+\hzo{}~\cite{boscke2011,muller2012,iung2025}. Fig.~\ref{fig:stacks}(c)
+summarizes the wake-up transformation for
+reference~\cite{pesic2016,schenk2014,grimley2016,cho2024wakeup}.
+
+Fig.~\ref{fig:cmwdef}(a) shows the effective permittivity of Stack~A at
+1~kHz for both sweep directions. The butterfly peaks reach
+$\xir \approx 62$ near $\mp0.55$\MVcm{}, and the two branches do not coincide
+at zero field: $\xi_\downarrow(0) = 55.0$ and $\xi_\uparrow(0) = 49.8$,
+giving $\CMW_\xi \approx 5.2$. This splitting---read at zero bias without
+disturbing the stored state---is the capacitive memory window. Stack~B
+[Fig.~\ref{fig:cmwdef}(b)] reaches the same peak permittivity,
+$\xir \approx 62$, but gives $\CMW_\xi \approx 2.3$ at the same 1~kHz probe
+frequency.
+
+Fig.~\ref{fig:cmwdef}(c) follows Stack~A from 1~kHz to 400~kHz. Two things
+occur together: the peaks fall from 62 to 30, and the branch separation
+shrinks until, by 400~kHz, the window has essentially closed. Critically, the
+dielectric response itself does not vanish---a permittivity of $\approx$30
+persists at 400~kHz and $\approx$27 at 500~kHz. What disappears is the
+\emph{difference} between the states. The window is therefore carried by a
+dispersive contribution superposed on a largely non-dispersive background,
+motivating the two-component treatment below.
+
+\subsection{The Window Relaxes as a Single Debye Species}
+\label{sec:debye}
+We model the poled stack as a two-component dielectric,
+\begin{equation}
+\xi^{*}_{\pm}(\omega) \;=\; \xi_\infty + \frac{\Delta\xi_\pm}{1+j\omega\tau}
+\label{eq:twocomp}
+\end{equation}
+where $\xi_\infty$ is the polarization-independent high-frequency
+permittivity and $\Delta\xi_\pm$ the state-dependent relaxing term. Because
+$\xi_\infty$ cancels analytically in the difference between states, the
+measured window isolates the relaxing component and is insensitive to the
+large non-relaxing background:
+\begin{align}
+\CMW(f) &= \frac{\CMW_0}{1+(f/\fc)^2} \label{eq:debyereal}\\
+\Delta\xi''(f) &= \frac{A_{\mathrm{DC}}}{f}
+   + \CMW_0\,\frac{f/\fc}{1+(f/\fc)^2} \label{eq:debyeimag}
+\end{align}
+with $\fc = 1/2\pi\tau$. The first loss term accounts for a state-dependent
+DC leakage contribution~\cite{nicollian1982,schroder2006}.
+
+\textit{Real part.} Fig.~\ref{fig:relaxation}(a) shows the measured CMW for
+both stacks across 61 frequencies. Stack~A is described by
+\eqref{eq:debyereal} with $\CMW_0 = 5.38$ and $\fc = 179$~kHz, corresponding
+to $\tau = 0.90\,\mu$s. Stack~B gives $\CMW_0 = 3.6$ and $\fc = 1.4$~kHz,
+i.e.\ $\tau = 114\,\mu$s; because Stack~B's roll-off begins below 10~kHz its
+plateau is an extrapolation, and its measured 1~kHz value (2.36) already lies
+at $f/\fc = 0.71$ on the roll-off.
+
+\textit{Imaginary part.} Fig.~\ref{fig:relaxation}(b) fits
+\eqref{eq:debyeimag} to the differential loss of Stack~A, obtained
+independently from the conductance channel. The decomposition returns a
+leakage coefficient $A_{\mathrm{DC}} = 551$~Hz and a Debye peak at
+$\fc = 182$~kHz with amplitude 5.94---within 2\% of the real-part corner. The
+residual is 0.13 against a peak loss of 2.9.
+
+\textit{Cole--Cole locus.} Fig.~\ref{fig:relaxation}(c) presents the
+differential Cole--Cole plot over 30--300~kHz after removal of the leakage
+term. Below 30~kHz the subtraction dominates the signal and above 300~kHz
+series-resistance loss lifts the locus; those points are shown as open
+symbols and excluded from the fit. The circular-arc fit constrained to pass
+through the origin returns a depression angle $\alpha = -2.7^\circ$, zero
+within uncertainty and of unphysical sign, so $\beta = 1$ within resolution.
+Forcing an ideal Debye arc with its centre on the real axis increases the rms
+radial residual only from 3.1\% to 3.5\% of the radius, so a distribution of
+relaxation times is not required by the data. The arc amplitude, 5.50, agrees
+to 2.1\% with $\CMW_0 = 5.38$ from the real-part fit---Kramers--Kronig
+closure between two independent measurement channels~\cite{colecole1941}.
+
+Three determinations of the corner---179~kHz (real part), 182~kHz (loss peak)
+and the arc geometry---agree within 2\%. The window relaxes as one
+well-defined species, which a distributed domain-wall or defect-continuum
+response would not produce~\cite{jonscher1977,jonscher1983}.
+
+\textit{Completeness of the relaxation.} Admitting a non-relaxing offset,
+$\CMW(f) = \CMW_\infty + \CMW_0/[1+(f/\fc)^2]$, returns
+$\CMW_\infty = -0.36 \pm 0.11$, negative and therefore unphysical as a
+residual; any non-relaxing component is below 7\% of $\CMW_0$. This is
+significant because a window limited by the ferroelectric's own response,
+which persists into the GHz range~\cite{kim2023impedance}, would leave such a
+residual. Instead, at 500~kHz the window has fallen to 0.45 while the
+permittivity is still 27: what survives the relaxation is state-independent.
+
+\textit{Intrinsic origin of the corner.} With $R_s = 267\,\Omega$, the
+circuit-limited corner lies at 1.81~MHz and the correction factor
+$(\omega R_s C)^2 = 0.010$ at $\fc$. The 179~kHz corner is therefore a
+property of the device, not the measurement circuit.
+
+\subsection{Temperature: The Window Freezes While Switching Persists}
+Fig.~\ref{fig:temperature} tests whether the window follows the polarization
+on the temperature axis.
+
+\textit{Switching survives.} Fig.~\ref{fig:temperature}(a) shows the
+switching current at both temperatures for $T_{pw} = 500\,\mu$s. At 300~K the
+peaks reach $\pm65\,\mu$A at $\mp0.99$\MVcm{}. At 10~K the peaks fall to
+$\approx13\,\mu$A and broaden, displaced to higher field, but switching
+persists. Fig.~\ref{fig:temperature}(b) shows the corresponding $P$--$E$
+loops: $2P_r$ falls from 33.1 to 20.3\uCcm{} while the coercive field rises
+from $E_c = 0.93$ to 1.17\MVcm{}, a 26\% increase.
+
+\textit{The reduction is kinetic, not a loss of ferroelectricity.}
+Fig.~\ref{fig:temperature}(c) resolves this directly. At 300~K, $2P_r$ rises
+steeply with write pulse width and saturates at 33\uCcm{} by 200~$\mu$s. At
+10~K it is still increasing at 1~ms, reaching only 20\uCcm{}, and has not
+saturated within the accessible pulse range. At fixed drive amplitude and
+pulse width the film is therefore progressively under-driven on cooling,
+consistent with the reduced domain-nucleation rate expected from NLS
+kinetics~\cite{tagantsev2002} and with reports of slowed switching in scaled
+\hzo{} at cryogenic temperature~\cite{das2026cryo}. The ferroelectric remains
+fully functional at 10~K---it is simply slower.
+
+\textit{The window behaves oppositely.} At 1~kHz the window falls from 5.2 to
+2.2 on cooling---a 58\% reduction but not extinction---and above 1.1~kHz
+drops to the noise floor of $\approx$0.2 [Fig.~\ref{fig:temperature}(d)].
+Since no Debye function can fall tenfold over a 10\% frequency interval, this
+is not a resolved roll-off but a bound: $\fc \lesssim 1$~kHz at 10~K, more
+than two decades below its room-temperature value. Notably the window does
+not vanish at 10~K; its \emph{clock} does, so that at sufficiently low
+frequency the interfacial charge can still follow.
+
+This is the first indication that the window is interface-limited: at 10~K
+the polarization still switches while the capacitive readout has lost its
+bandwidth. A quantity limited by the ferroelectric would not lose bandwidth
+while the ferroelectric itself remains operational.
+
+\textit{The asymmetry is not the ferroelectric imprint.}
+Fig.~\ref{fig:temperature}(e) compares the two independently measured
+built-in voltages. From the $P$--$E$ loops, the imprint \eqref{eq:coercive}
+is $+0.017$~V at 300~K and $+0.009$~V at 10~K---essentially symmetric, since
+$V_c^{+} = 0.949$~V and $V_c^{-} = -0.915$~V at 300~K. The $C$--$V$ crossing
+voltage of the same stack is $0.221 \pm 0.005$~V, thirteen times larger, and
+is frequency-independent: $0.219 \pm 0.003$~V over 1--10~kHz,
+$0.224 \pm 0.005$~V over 10--100~kHz and 0.215~V over 100--300~kHz, i.e.\
+constant to $\pm2$\% across 2.5 decades while the window amplitude falls from
+5.4 to below 1. The asymmetry gating the window is therefore not the
+ferroelectric loop asymmetry. It is what would be expected of a thin
+interfacial layer supporting a significant fraction of the applied bias while
+contributing negligibly to the switched
+charge~\cite{alcala2023,schenk2014apr,li2024imprint}. The dichotomy---a
+relaxing amplitude on a static position---is itself difficult to reconcile
+with a mechanism intrinsic to the ferroelectric, since a field-dependent
+ferroelectric process would be expected to shift the crossing point as it
+disperses.
+
+\subsection{The Interface Sets the Clock}
+If the window is interface-limited, changing the interface should change its
+dynamics; if ferroelectric-limited, it should not.
+
+\textit{Identical ferroelectric ceilings.} Fig.~\ref{fig:twoclocks}(a) shows
+the peak permittivity of both stacks. Extrapolating the roll-off to zero
+frequency using the same Debye form gives $\xir(f\!\rightarrow\!0) =
+62.4 \pm 1.2$ for Stack~A and $62.7 \pm 0.9$ for Stack~B---statistically
+identical, and consistent with the measured 1~kHz values of 62.5 and 62.2.
+Both stacks therefore present the same intrinsic dielectric amplitude from
+the \hzo{} layer. Their high-frequency limits differ,
+$\xi_\infty = 21.7 \pm 0.9$ and $15.8 \pm 0.5$, as expected if the series
+interfacial layers differ. (Stack~B's apparent decline to $\xir \approx 6$
+above 200~kHz falls below its own fitted $\xi_\infty$ and is circuit-limited,
+its larger capacitance placing its RC corner lower.)
+
+\textit{Two-decade difference in clock.} Against those identical ceilings,
+the two windows relax $126\times$ apart: $\tau = 0.90\,\mu$s versus
+114~$\mu$s. Fig.~\ref{fig:twoclocks}(b) shows that scaling each dataset by
+its own corner frequency and plateau collapses both onto the universal Debye
+form $1/(1+x^2)$---the same functional response, two different clocks.
+Fig.~\ref{fig:twoclocks}(c) summarizes: identical dielectric response (62
+versus 62), windows of 5.2 versus 2.4 at 1~kHz, and built-in fields of 0.22
+versus 0.08\MVcm{}. The stack with the larger built-in field also shows the
+larger window, consistent with the asymmetry setting the window amplitude,
+although two devices cannot establish a scaling relation between them.
+
+\textit{Controls.} First, Stack~B's low corner is not an RC artifact: with
+the fitted $R_s$ and Stack~B's capacitance the circuit-limited corner lies
+near 220~kHz, more than two decades above the observed 1.4~kHz. Second, the
+difference cannot originate in the ferroelectric, whose low-frequency
+dielectric ceiling is identical in both to within 1.5\%.
+
+We attribute the difference to the interface, noting the structural
+correlation that Stack~B, which contains a deliberate WO$_x$ interfacial
+layer~\cite{paul2026wox}, is the slower of the two---as expected for
+relaxation across a more resistive interfacial layer. We state the limitation
+explicitly: the two stacks differ in electrode materials and ferroelectric
+thickness as well as in the WO$_x$ layer, so a single causal variable cannot
+be isolated from two devices. The claim the data support unambiguously is
+that two stacks sharing the same ferroelectric dielectric ceiling exhibit
+windows differing by two orders of magnitude in relaxation time---the clock
+is not set by the ferroelectric.
+
+\subsection{Mechanism: Maxwell--Wagner Relaxation}
+A ferroelectric layer in series with a thinner, more resistive interfacial
+layer exhibits Maxwell--Wagner interfacial relaxation with a single time
+constant~\cite{jonscher1983,kremer2003}
+\begin{equation}
+\tau = \frac{\varepsilon_i d_f + \varepsilon_f d_i}
+            {\sigma_i d_f + \sigma_f d_i}
+     \;\approx\; \frac{\varepsilon_i}{\sigma_i}
+     \qquad (d_i \ll d_f)
+\label{eq:mw}
+\end{equation}
+set by the interfacial layer alone [Fig.~\ref{fig:mechanism}(a),(b)]. This
+accounts for every observation without additional assumptions.
+
+A two-layer series network produces exactly one relaxation, matching the
+undepressed arc of Fig.~\ref{fig:relaxation}(c) and the 2\% agreement among
+three independent corner determinations. The interfacial layer supports a
+static built-in potential set by the electrode/oxide chemistry, giving the
+frequency-independent $\Ecross$ above while the charge redistribution across
+it relaxes. Because $\tau$ depends only on the interfacial layer, it changes
+with the stack: taking $\varepsilon_i$ from the measured $\xi_\infty$ values,
+\eqref{eq:mw} implies $\sigma_i = 2.2\times10^{-4}$~S/m for Stack~A and
+$1.2\times10^{-6}$~S/m for Stack~B. These are order-of-magnitude estimates,
+but they lie in the range expected for a defective, vacancy-rich interfacial
+oxide~\cite{kim2023vacancy,segantini2023strain,koroleva2022,iung2025}, and
+their ratio reproduces the observed spread in $\tau$. The picture is
+independently supported by impedance spectroscopy of 10~nm \hzo{} capacitors,
+which resolves distinct interface and bulk RC elements with pristine
+resistances of $\approx$1~k$\Omega$ and $\approx$500~M$\Omega$
+respectively~\cite{alcala2023}. Since $\sigma_i$ is thermally activated,
+$\tau$ grows rapidly on cooling and the corner falls out of the measurement
+band [Fig.~\ref{fig:temperature}(d)], while the ferroelectric---whose
+switching does not depend on interfacial conduction---continues to operate.
+
+\textit{Separating the interfacial capacitance from the interfacial
+resistance.} Because the interfacial region enters as a series element, its
+areal capacitance can be extracted directly from the two permittivity limits
+without any assumption about its thickness or permittivity. Writing the
+low-frequency limit $\xi_{FE}$ (interfacial layer conducting) and the
+high-frequency limit $\xi_\infty$ (interfacial layer blocking) as series
+capacitances gives
+\begin{equation}
+c_{IL} = \frac{\varepsilon_0}{d\left(\xi_\infty^{-1}-\xi_{FE}^{-1}\right)},
+\qquad
+R_{IL} = \frac{\tau}{c_{IL}}
+\label{eq:cil}
+\end{equation}
+the second relation following from $\tau = R_{IL}c_{IL}$ for the series
+element. Applying \eqref{eq:cil} to the fitted limits gives
+$c_{IL} = 2.95$ and 2.34~$\mu$F/cm$^2$ for Stacks~A and~B---a difference of
+only 26\%---while the corresponding areal resistances are 0.31 and
+48.8~$\Omega\cdot$cm$^2$, a factor of 157. The product reproduces the measured
+relaxation times to within 3\% ($157 \times 0.79 = 124$ versus the observed
+$126\times$), confirming internal consistency. The two stacks therefore
+present interfacial layers of nearly the same series capacitance but
+differing by more than two orders of magnitude in resistance: the WO$_x$
+layer acts by lowering interfacial conductance, not by adding series
+thickness [Fig.~\ref{fig:mechanism}(c)]. This is a design statement---to move the read corner, engineer
+interfacial conductivity rather than interfacial thickness---and it is
+obtained without imaging the interface. We note that $c_{IL}$ and $R_{IL}$
+are sums over both interfaces of each stack and cannot be apportioned between
+them electrically; converting them to a physical thickness additionally
+requires $\xi_{IL}$, for which $\sigma_i \approx 10^{-6}$--$10^{-4}$~S/m
+follows if $\xi_{IL} \approx 6$--30 is assumed.
+
+This does not imply the ferroelectric is absent from the window: below $\fc$
+the measured capacitance is that of the ferroelectric layer, and the
+polarization defines the two states being compared. It implies that the
+window's \emph{existence} requires the interfacial asymmetry, and that its
+magnitude, clock and temperature range are interfacial properties. We present
+this as the interpretation consistent with all measurements; direct
+structural confirmation by TEM/EELS of the two
+interfaces~\cite{iung2025,kumar2025review,das2026paradox} is the natural next
+step.
+
+\subsection{Design Rules for Capacitive Readout}
+\textit{The usable read band is $f \lesssim \fc(T)$, and it is an interface
+property.} Reading above the corner does not merely reduce the margin, it
+eliminates it. Since $\fc$ varies from 179~kHz to 1.4~kHz between our two
+stacks, a read frequency well inside the plateau for one stack lies two
+decades beyond the corner for the other. A CMW quoted at a single frequency
+is therefore not portable across stacks, and apparent disagreements between
+reports may reflect only where each probe frequency sat relative to that
+device's corner. We suggest CMW values be reported together with the measured
+$\fc$, or with evidence that the read frequency lies in the plateau.
+
+\textit{A larger zero-bias window trades against stability.} The margin
+obtained through interfacial asymmetry is built from the same charge that
+relaxes with frequency and freezes on cooling. This gives a physical basis
+for the reliability concerns motivating symmetric-stack, finite-read-bias
+designs~\cite{lee2025aem,rana2025cp,fehlings2025}: the two philosophies
+represent a genuine trade between circuit simplicity and read-margin
+stability.
+
+\textit{Capacitive read is a warm-temperature technique.} At 10~K the readout
+bandwidth has collapsed below 1~kHz while switching persists, so a
+capacitive-read cell that functions at 300~K may fail to resolve its states
+at cryogenic temperature. Cryogenic ferroelectric memory should therefore
+fall back on the polarization read, which remains available precisely because
+the polarization survives---with write pulses lengthened to $\gtrsim$1~ms to
+accommodate the slower kinetics of
+Fig.~\ref{fig:temperature}(c)~\cite{das2026cryo}.
+
+%=======================================================================
+\section{Conclusion}
+%=======================================================================
+The capacitive memory window of ferroelectric \hzo{} capacitors is gated by
+an interfacial charge layer. The polarization defines the two states, but the
+interface determines whether, how fast, and over what temperature range they
+can be distinguished capacitively. Symmetry requires the window to vanish for
+a symmetric stack regardless of $2P_r$, and we find the interfacial asymmetry
+that opens it ($\Ecross = 0.221$\MVcm{}) is an order of magnitude larger than
+the ferroelectric loop imprint (0.017~V) and frequency-independent to
+$\pm2$\% across 2.5 decades. The window relaxes as a single Debye species
+with $\fc = 179$~kHz, confirmed by three independent determinations agreeing
+within 2\% and by Kramers--Kronig closure to 2.1\%, and it relaxes
+completely, leaving no component on the ferroelectric's own timescale. Its
+corner falls below 1~kHz at 10~K while switching persists, the reduced
+$2P_r$ being kinetically limited rather than lost. Two stacks whose
+ferroelectric dielectric ceilings coincide to within 1.5\% exhibit windows
+differing $126\times$ in relaxation time. The behaviour is quantitatively
+consistent with Maxwell--Wagner relaxation across an interfacial layer of
+implied conductivity $10^{-6}$--$10^{-4}$~S/m, thermally activated and set by
+the interface chemistry. The NDRO read band is therefore bounded by an
+interface-determined corner frequency varying by orders of magnitude between
+stacks, single-frequency CMW values are not comparable across reports, and a
+larger zero-bias window is purchased from the least stable part of the
+device. Engineering the capacitive read is an exercise in interface
+engineering. The evolution of the window under extended field cycling is the
+subject of ongoing work.
+
+%=======================================================================
+%  FIGURES
+%=======================================================================
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig1.png}
+\caption{As-fabricated device stacks and phase characterization.
+(a) Schematic of the two metal--ferroelectric--metal capacitors: Stack~A,
+TaN/\hzo{}(10~nm)/TiN, and Stack~B, TiN/PE-TiN/\hzo{}(8~nm)/WO$_x$/W, the
+latter incorporating a deposited tungsten-oxide layer at the bottom contact.
+Layers are drawn as deposited; reacted interfacial regions are addressed in
+Section~III-E. (b) GIXRD of the \hzo{} film showing the dominant polar
+orthorhombic reflection with residual monoclinic contribution (inset).
+(c) Schematic of the wake-up process, in which field cycling converts
+non-polar monoclinic to polar orthorhombic phase and de-pins domains, with
+representative pristine and woken $P$--$E$ loops.}
+\label{fig:stacks}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig2.png}
+\caption{Definition and frequency collapse of the CMW at 300~K.
+(a) Effective relative permittivity of Stack~A at 1~kHz for both sweep
+directions; the branches are displaced at zero field,
+$\xi_\downarrow(0) = 55.0$ and $\xi_\uparrow(0) = 49.8$, defining
+$\CMW_\xi \approx 5.2$. (b) The same measurement on Stack~B, giving
+$\CMW_\xi \approx 2.3$ at the same peak permittivity. (c) Stack~A from 1~kHz
+to 400~kHz; the branch separation collapses while a permittivity of
+$\approx$30 remains at 400~kHz, indicating that the window is carried by a
+dispersive contribution superposed on a largely non-dispersive background.}
+\label{fig:cmwdef}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig3.png}
+\caption{The window relaxes as a single Debye species. (a) CMW at zero bias
+versus frequency for both stacks with single-Debye fits: $\fc = 179$~kHz
+($\tau = 0.90\,\mu$s) for Stack~A and $\fc = 1.4$~kHz ($\tau = 114\,\mu$s)
+for Stack~B. (b) Differential loss $\Delta\xi''$ for Stack~A, decomposed into
+a DC-leakage contribution $\propto 1/f$ and a Debye loss peak at 182~kHz,
+obtained from the conductance channel and therefore an independent
+determination. (c) Differential Cole--Cole locus over 30--300~kHz after
+removal of the leakage term, fitted by a circular arc constrained to pass
+through the origin. The depression angle, $-2.7^\circ$, is zero within
+uncertainty; forcing an ideal Debye arc increases the rms radial residual only
+from 3.1\% to 3.5\%, and the arc amplitude, 5.50, agrees to 2.1\% with
+$\CMW_0 = 5.38$ from the real-part fit (dashed). Open symbols lie outside the
+analysis band.}
+\label{fig:relaxation}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig4.png}
+\caption{The window freezes while switching persists. (a) Switching current at
+300~K and 10~K ($T_{pw} = 500\,\mu$s); peaks fall from $\pm65\,\mu$A to
+$\approx13\,\mu$A and shift to higher field, but switching persists.
+(b) $P$--$E$ hysteresis; $2P_r$ falls from 33.1 to 20.3\uCcm{} while $E_c$
+rises from 0.93 to 1.17\MVcm{}. (c) $2P_r$ versus write pulse width at
+$V_R = \pm2$~V; at 300~K the polarization saturates at 33\uCcm{} by
+200~$\mu$s, whereas at 10~K it has not saturated even at 1~ms, showing the
+reduction to be kinetically limited. (d) CMW at 10~K, resolvable only at the
+lowest measured frequency and at the noise floor above 1.1~kHz, bounding
+$\fc \lesssim 1$~kHz. (e) Built-in voltage comparison: the $C$--$V$ crossing
+voltage (0.221~V) exceeds the $P$--$E$ loop imprint (0.017~V at 300~K,
+0.009~V at 10~K) by an order of magnitude, indicating that the asymmetry
+gating the window is not the ferroelectric loop asymmetry.}
+\label{fig:temperature}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig5.png}
+\caption{The interface, not the ferroelectric, sets the relaxation time.
+(a) Peak permittivity versus frequency; both stacks extrapolate to the same
+dielectric ceiling, $\xir(f\!\rightarrow\!0) = 62.4 \pm 1.2$ and
+$62.7 \pm 0.9$, despite the two-decade difference in corner frequency, while
+their high-frequency limits differ ($\xi_\infty = 21.7$ and 15.8).
+(b) Master-curve representation: scaling each dataset by its own corner
+frequency and plateau collapses both onto $1/(1+x^2)$. (c) Summary comparison
+of dielectric response, window magnitude and built-in field. The stack
+containing an explicit WO$_x$ interfacial layer exhibits the slower
+relaxation, as expected for Maxwell--Wagner relaxation across a more
+resistive interfacial layer.}
+\label{fig:twoclocks}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig6.png}
+\caption{Interfacial origin of the capacitive memory window.
+(a) Cross-sections of both stacks including the reacted interfacial regions:
+TaO$_x$N$_y$ and TiO$_x$N$_y$ form at the nitride contacts of Stack~A and at
+the PE-TiN contact of Stack~B by oxygen scavenging during deposition and
+crystallization (dashed outlines: inferred from the electrical extraction and
+from the literature, not imaged here), while the WO$_x$ layer of Stack~B is
+deposited (solid outline). Markers indicate oxygen vacancies and trapped
+charge in the \hzo{} adjacent to each interface. (b) Equivalent circuit: the
+ferroelectric layer in series with the interfacial layer, giving a single
+Maxwell--Wagner relaxation $\tau = R_{IL}c_{IL} \approx \varepsilon_i/\sigma_i$.
+(c) Interfacial areal capacitance and resistance extracted using
+\eqref{eq:cil}: the two stacks differ by 26\% in $c_{IL}$ but by $157\times$
+in $R_{IL}$.}
+\label{fig:mechanism}
+\end{figure*}
+
+%=======================================================================
+%  TABLE
+%=======================================================================
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.15}
+\caption{Extracted Parameters for Both Stacks}
+\label{tab:params}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Parameter & Stack A & Stack B \\
+\midrule
+Top / bottom electrode          & TaN / TiN        & TiN / WO$_x$--W \\
+Thickness $d$ (nm)              & 10               & 8$^{\dagger}$ \\
+$C_0$ (pF)                      & 15.0             & --- \\
+Peak $\xir$ at 1 kHz            & 62.5             & 62.2 \\
+Ceiling $\xir(0)$               & $62.4\!\pm\!1.2$ & $62.7\!\pm\!0.9$ \\
+$\xi_\infty$                    & $21.7\!\pm\!0.9$ & $15.8\!\pm\!0.5$ \\
+CMW at 1 kHz                    & 5.2              & 2.4 \\
+$\CMW_0$ (fit)                  & 5.38             & 3.6$^{\ddagger}$ \\
+$\fc$                           & 179 kHz          & 1.4 kHz \\
+$\tau$                          & 0.90 $\mu$s      & 114 $\mu$s \\
+Loss-peak corner                & 182 kHz          & --- \\
+$\beta$ ($\alpha$)              & 1.00 ($-2.7^\circ$) & --- \\
+$\Ecross$ (MV/cm)               & 0.221            & 0.081 \\
+$R_s$ ($\Omega$)                & 267              & --- \\
+$f_{RC}$                        & 1.81 MHz         & $\approx$220 kHz \\
+$c_{IL}$ ($\mu$F/cm$^2$)        & 2.95             & 2.34 \\
+$R_{IL}$ ($\Omega\cdot$cm$^2$)  & 0.31             & 48.8 \\
+$\varepsilon_0/c_{IL}$ (nm)     & 0.301            & 0.379 \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Stack A, 300 K / 10 K}}\\
+$2P_r$ ($\mu$C/cm$^2$)          & \multicolumn{2}{c}{33.1 / 20.3} \\
+$E_c$ (MV/cm)                   & \multicolumn{2}{c}{0.93 / 1.17} \\
+Imprint (V)                     & \multicolumn{2}{c}{$+0.017$ / $+0.009$} \\
+CMW at 1 kHz                    & \multicolumn{2}{c}{5.2 / 2.2} \\
+$\fc$                           & \multicolumn{2}{c}{179 kHz / $\lesssim$1 kHz} \\
+\bottomrule
+\end{tabular}
+\\[2pt]
+\raggedright\scriptsize $^{\dagger}$To be confirmed; used for field-unit
+conversion. $^{\ddagger}$Extrapolated.
+\end{table}
+
+%=======================================================================
+%  ACKNOWLEDGMENT
+%=======================================================================
+\section*{Acknowledgment}
+The authors thank TSRI and the NTHU College of Semiconductor Research for
+fabrication and measurement support.
+
+%=======================================================================
+%  REFERENCES
+%=======================================================================
+\begin{thebibliography}{99}
+\itemsep 0pt
+
+\bibitem{boscke2011}
+T.~S. B\"oscke, J.~M\"uller, D.~Br\"auhaus, U.~Schr\"oder, and U.~B\"ottger,
+``Ferroelectricity in hafnium oxide thin films,''
+\emph{Appl. Phys. Lett.}, vol.~99, no.~10, 102903, 2011.
+
+\bibitem{muller2012}
+J.~M\"uller \emph{et al.},
+``Ferroelectricity in simple binary ZrO$_2$ and HfO$_2$,''
+\emph{Nano Lett.}, vol.~12, no.~8, pp.~4318--4323, 2012.
+
+\bibitem{cho2024beol}
+S.-H. Cho \emph{et al.},
+``Exploring BEOL-compatible ferroelectricity in ultra-thin hafnium--zirconium
+oxide,'' \emph{IEEE J. Electron Devices Soc.}, vol.~12, 2024.
+
+\bibitem{schroeder2022}
+U.~Schroeder, M.~H. Park, T.~Mikolajick, and C.~S. Hwang,
+``The fundamentals and applications of ferroelectric HfO$_2$,''
+\emph{Nat. Rev. Mater.}, vol.~7, pp.~653--669, 2022.
+
+\bibitem{paul2025review}
+A.~Paul, G.~Kumar, A.~Das, G.~Larrieu, and S.~De,
+``Hafnium oxide-based ferroelectric field effect transistors: from materials
+and reliability to applications in storage-class memory and in-memory
+computing,'' \emph{J. Appl. Phys.}, vol.~138, no.~1, 010701, 2025.
+
+\bibitem{sunil2024cam}
+A.~Sunil \emph{et al.},
+``Ferroelectric field effect transistors--based content-addressable
+storage-class memory,'' \emph{Adv. Intell. Syst.}, 2024.
+
+\bibitem{das2026cryo}
+A.~Das \emph{et al.},
+``Sub-2 nm equivalent-oxide-thickness ferroelectric transistors for cryogenic
+memory and computing,'' \emph{ACS Nano}, 2026,
+doi: 10.1021/acsnano.5c16255.
+
+\bibitem{sk2025stdp}
+S.~M. Sk \emph{et al.},
+``Spike-timing dependent learning dynamics in silicon-doped hafnium-oxide
+based ferroelectric field effect transistors,''
+\emph{IEEE J. Electron Devices Soc.}, vol.~13, 2025.
+
+\bibitem{mukherjee2023edl}
+S.~Mukherjee \emph{et al.},
+``Capacitive memory window with non-destructive read in ferroelectric
+capacitors,'' \emph{IEEE Electron Device Lett.}, vol.~44, no.~7,
+pp.~1092--1095, 2023.
+
+\bibitem{mukherjee2023iedm}
+S.~Mukherjee \emph{et al.},
+in \emph{IEDM Tech. Dig.}, 2023.
+
+\bibitem{mukherjee2024iedm}
+S.~Mukherjee \emph{et al.},
+in \emph{IEDM Tech. Dig.}, 2024.
+
+\bibitem{lee2025aem}
+M.~Lee \emph{et al.},
+``Experimental demonstration of capacitive in-memory computing using
+ferroelectric HZO memcapacitors,''
+\emph{Adv. Electron. Mater.}, vol.~11, e00588, 2025.
+
+\bibitem{mukherjee2025edl}
+S.~Mukherjee \emph{et al.},
+\emph{IEEE Electron Device Lett.}, vol.~46, no.~4, p.~576, 2025.
+
+\bibitem{pesic2016}
+M.~Pe\v{s}i\'c \emph{et al.},
+``Physical mechanisms behind the field-cycling behavior of HfO$_2$-based
+ferroelectric capacitors,'' \emph{Adv. Funct. Mater.}, vol.~26, no.~25,
+pp.~4601--4612, 2016.
+
+\bibitem{schenk2014}
+T.~Schenk \emph{et al.},
+``Electric field cycling behavior of ferroelectric hafnium oxide,''
+\emph{ACS Appl. Mater. Interfaces}, vol.~6, no.~22, pp.~19744--19751, 2014.
+
+\bibitem{grimley2016}
+E.~D. Grimley \emph{et al.},
+``Structural changes underlying field-cycling phenomena in ferroelectric
+HfO$_2$ thin films,'' \emph{Adv. Electron. Mater.}, vol.~2, 1600173, 2016.
+
+\bibitem{kim2023vacancy}
+S.~Kim \emph{et al.},
+``Role of oxygen vacancies in ferroelectric or resistive switching hafnium
+oxide,'' \emph{Nano Convergence}, vol.~10, 55, 2023,
+doi: 10.1186/s40580-023-00403-4.
+
+\bibitem{segantini2023strain}
+G.~Segantini \emph{et al.},
+``Interplay between strain and defects at the interfaces of ultra-thin
+\hzo{}-based ferroelectric capacitors,''
+\emph{Adv. Electron. Mater.}, vol.~9, 2300171, 2023.
+
+\bibitem{koroleva2022}
+A.~Koroleva \emph{et al.},
+``Retention improvement of HZO-based ferroelectric capacitors with TiO$_2$
+insets,'' \emph{ACS Omega}, vol.~7, no.~51, pp.~47084--47093, 2022.
+
+\bibitem{alcala2023}
+R.~Alcala \emph{et al.},
+``The electrode--ferroelectric interface as the primary constraint on
+endurance and retention in HZO-based ferroelectric capacitors,''
+\emph{Adv. Funct. Mater.}, vol.~33, no.~43, 2303261, 2023,
+doi: 10.1002/adfm.202303261.
+
+\bibitem{schenk2014apr}
+T.~Schenk \emph{et al.},
+``About the deformation of ferroelectric hystereses,''
+\emph{Appl. Phys. Rev.}, vol.~1, 041103, 2014.
+
+\bibitem{li2024imprint}
+H.~Li \emph{et al.},
+``Imprint in HfO$_2$ ferroelectric capacitors,''
+in \emph{IEDM Tech. Dig.}, 2024.
+
+\bibitem{cho2024wakeup}
+S.-H. Cho \emph{et al.},
+``Unraveling the wake-up mechanism in ultrathin ferroelectric \hzo{},''
+\emph{IEEE Trans. Electron Devices}, vol.~71, 2024.
+
+\bibitem{de2024tradeoff}
+S.~De \emph{et al.},
+``Trade-off between thermal budget and thickness scaling: a bottleneck on the
+quest for BEOL-compatible ultra-thin ferroelectric films,''
+in \emph{Proc. IEEE VLSI-TSA}, 2024.
+
+\bibitem{iung2025}
+J.~Iung \emph{et al.},
+``Oxygen vacancy distribution and phase composition in scaled \hzo{}-based
+ferroelectric capacitors,'' \emph{Appl. Phys. Lett.}, 2025.
+
+\bibitem{kumar2025review}
+G.~Kumar \emph{et al.},
+``Insights into oxygen vacancy effects on ferroelectric behavior of hafnium
+oxide: a review,'' \emph{Phys. Status Solidi A}, 2025.
+
+\bibitem{rana2025cp}
+S.~M. Rana \emph{et al.},
+``Trapping dynamics and endurance in HfO$_2$-FeFETs: an insight from charge
+pumping,'' \emph{IEEE Electron Device Lett.}, vol.~46, 2025.
+
+\bibitem{raffel2025}
+C.~Raffel \emph{et al.},
+``Defect dynamics in silicon-doped HfO$_2$-based front-end-of-line FeFETs,''
+\emph{IEEE Trans. Electron Devices}, 2025.
+
+\bibitem{senapati2025}
+A.~Senapati \emph{et al.},
+``Long-term reliability of naturally aged hafnium oxide ferroelectric
+transistors for energy-efficient embedded memory,''
+\emph{Cell Rep. Phys. Sci.}, 2025.
+
+\bibitem{das2026paradox}
+A.~Das \emph{et al.},
+``Endurance paradox in hafnium-oxide-based silicon-channel ferroelectric
+transistors,'' \emph{ACS Appl. Mater. Interfaces}, 2026.
+
+\bibitem{das2025sisc}
+A.~Das \emph{et al.},
+``Fundamental insights into trap accumulation and endurance degradation in
+HfO$_2$ FeFETs,'' in \emph{Proc. SISC}, 2025.
+
+\bibitem{paul2026wox}
+A.~Paul \emph{et al.},
+``WO$_x$--HZO--PEALD-TiN interface-engineered ferroelectric capacitors with
+$>2\times10^{10}$ endurance,'' in \emph{Proc. IEEE VLSI-TSA}, 2026.
+
+\bibitem{tagantsev2002}
+A.~K. Tagantsev, I.~Stolichnov, N.~Setter, J.~S. Cross, and M.~Tsukada,
+``Non-Kolmogorov-Avrami switching kinetics in ferroelectric thin films,''
+\emph{Phys. Rev. B}, vol.~66, 214109, 2002.
+
+\bibitem{segantini2022ti}
+G.~Segantini \emph{et al.},
+``Ferroelectricity improvement in ultra-thin \hzo{} capacitors by the
+insertion of a Ti interfacial layer,''
+\emph{Phys. Status Solidi RRL}, vol.~16, 2100583, 2022.
+
+\bibitem{kim2023impedance}
+T.~Kim, J.~A. del Alamo, and D.~A. Antoniadis,
+``AC impedance characteristics of ferroelectric \hzo{}: from 1 kHz to
+10 GHz,'' in \emph{IEDM Tech. Dig.}, 2023.
+
+\bibitem{jonscher1977}
+A.~K. Jonscher,
+``The `universal' dielectric response,''
+\emph{Nature}, vol.~267, pp.~673--679, 1977.
+
+\bibitem{jonscher1983}
+A.~K. Jonscher,
+\emph{Dielectric Relaxation in Solids}.
+London, U.K.: Chelsea Dielectrics Press, 1983.
+
+\bibitem{nicollian1982}
+E.~H. Nicollian and J.~R. Brews,
+\emph{MOS Physics and Technology}.
+New York, NY, USA: Wiley, 1982.
+
+\bibitem{schroder2006}
+D.~K. Schroder,
+\emph{Semiconductor Material and Device Characterization}, 3rd~ed.
+Hoboken, NJ, USA: Wiley, 2006.
+
+\bibitem{kremer2003}
+F.~Kremer and A.~Sch\"onhals, Eds.,
+\emph{Broadband Dielectric Spectroscopy}.
+Berlin, Germany: Springer, 2003.
+
+\bibitem{colecole1941}
+K.~S. Cole and R.~H. Cole,
+``Dispersion and absorption in dielectrics. I. Alternating current
+characteristics,'' \emph{J. Chem. Phys.}, vol.~9, no.~4, pp.~341--351, 1941.
+
+\bibitem{li2021traps}
+J.~Li, M.~Si, Y.~Qu, X.~Lyu, and P.~D. Ye,
+``Quantitative characterization of ferroelectric/dielectric interface traps by
+pulse measurements,'' \emph{IEEE Trans. Electron Devices}, vol.~68, no.~3,
+pp.~1214--1220, 2021.
+
+\bibitem{luo2020}
+Y.-C. Luo, J.~Hur, P.~Wang, A.~I. Khan, and S.~Yu,
+``Non-volatile, small-signal capacitance in ferroelectric capacitors,''
+\emph{Appl. Phys. Lett.}, vol.~117, 073501, 2020.
+
+\bibitem{fehlings2025}
+L.~Fehlings \emph{et al.},
+``Reliability of capacitive read in arrays of ferroelectric capacitors,''
+in \emph{Proc. IEEE ISCAS}, 2025.
+
+\end{thebibliography}
+
+\end{document}
