@@ -1,0 +1,17 @@
+At 1~kHz, both stacks show the butterfly-shaped permittivity expected for ferroelectric \hzo{}, but they do not exhibit the same zero-bias read margin. Stack~A gives $\CMW_\xi \approx 5.2$, whereas Stack~B gives $\CMW_\xi \approx 2.3$ at a similar peak permittivity of about 62 [Fig.~\ref{fig:cmw}]. As frequency increases, the branch separation collapses even though a substantial dielectric response remains. The key observation is that the state-dependent part disappears faster than the underlying permittivity, so the read margin is carried by a dispersive contribution rather than by the full ferroelectric response.
+
+The frequency dependence of the window is well described by a single-Debye relaxation,
+\begin{equation}
+\CMW(f)=\frac{\CMW_0}{1+(f/\fc)^2}.
+\label{eq:debye_short}
+\end{equation}
+For Stack~A the fit gives $\CMW_0=5.38$ and $\fc=179$~kHz ($\tau=0.90\,\mu$s), while Stack~B relaxes at $\fc=1.4$~kHz ($\tau=114\,\mu$s) [Fig.~\ref{fig:debye}]. Differential loss and the Cole--Cole analysis reported in the full manuscript support the same single-process interpretation~\cite{jonscher1983,colecole1941}. This argues against a broad ferroelectric relaxation spectrum as the dominant origin of the zero-bias CMW.
+
+Temperature further separates capacitive readout from switching. At 10~K, Stack~A still switches, with $2P_r$ reduced from 33.1 to 20.3\uCcm{} and $E_c$ increased from 0.93 to 1.17\MVcm{}, but the capacitive read window shrinks to about 2.2 at 1~kHz and falls to the noise floor above 1.1~kHz [Fig.~\ref{fig:cryo}]. Cooling therefore suppresses the CMW bandwidth by more than two decades while leaving polarization reversal measurable, which is not what a ferroelectric-limited readout would predict~\cite{das2026cryo,tagantsev2002}.
+
+The strongest evidence for an interface-controlled clock comes from comparing the two stacks. Their low-frequency dielectric ceilings are nearly identical, yet their relaxation times differ by $126\times$ [Table~\ref{tab:summary} and Fig.~\ref{fig:cryo}]. A compact Maxwell--Wagner description,
+\begin{equation}
+\tau \approx \frac{\varepsilon_i}{\sigma_i},
+\label{eq:mw_short}
+\end{equation}
+accounts for that split by assigning the timescale to a more resistive interfacial layer rather than to the ferroelectric bulk~\cite{alcala2023,kremer2003}. The extracted interfacial areal capacitances differ only modestly (2.95 versus 2.34~$\mu$F/cm$^2$), whereas the corresponding areal resistances differ by about $157\times$. The usable zero-bias NDRO band is therefore an interface property, and single-frequency CMW values are not portable across stacks unless the corner frequency is also reported.
