@@ -8,6 +8,12 @@
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{url}
 
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+
 \newcommand{\hzo}{Hf$_{0.5}$Zr$_{0.5}$O$_2$}
 \newcommand{\xir}{\xi_{r}}
 \newcommand{\CMW}{\mathrm{CMW}}
@@ -18,7 +24,7 @@
 
 \begin{document}
 
-\title{Maxwell--Wagner Relaxation Limits Zero-Bias Capacitive Memory Window Readout in Ferroelectric \hzo{} Capacitors}
+\title{Interfacial Maxwell--Wagner Relaxation Limits Zero-Bias Capacitive Readout in Ferroelectric \hzo{} Capacitors}
 
 \author{\IEEEauthorblockN{Apu Das and Sourav De}
 \IEEEauthorblockA{College of Semiconductor Research, National Tsing Hua University, Hsinchu 300044, Taiwan\\
@@ -27,11 +33,11 @@ Email: apudas@nthu.edu.tw, sourav.de@mx.nthu.edu.tw}}
 \maketitle
 
 \begin{abstract}
-The zero-bias capacitive memory window (CMW) enables non-destructive readout in ferroelectric capacitors, but its practical bandwidth is not set by polarization alone. We compare two \hzo{} capacitor stacks by frequency-resolved $C$--$V$ spectroscopy from 1~kHz to 4~MHz together with PUND and switching-current measurements at 300~K and 10~K. The CMW of TaN/\hzo{}/TiN relaxes as a single Debye process with $\fc = 179$~kHz, while a WO$_x$-bearing stack with nearly the same low-frequency dielectric ceiling relaxes at $\fc = 1.4$~kHz. At 10~K the capacitive read window falls below 1~kHz even though polarization switching persists. The data support an interface-limited Maxwell--Wagner mechanism: polarization stores the bit, but interfacial conductivity sets whether and how fast the states remain capacitively distinguishable.
+The capacitive memory window (CMW) of ferroelectric capacitors enables non-destructive readout, yet the mechanism that sets its usable bandwidth and temperature range remains unclear. We condense the full TMAT manuscript into a conference format by keeping the complete plot set and the core experimental comparison between TaN/\hzo{}/TiN and TiN/PE-TiN/\hzo{}/WO$_x$/W capacitors. Frequency-resolved $C$--$V$ spectroscopy from 1~kHz to 4~MHz, together with PUND and switching-current measurements at 300~K and 10~K, shows that the zero-bias CMW collapses as a single-Debye relaxation with $\fc = 179$~kHz in Stack~A but only $\fc = 1.4$~kHz in the WO$_x$-bearing stack. At 10~K the read window falls below 1~kHz although polarization switching persists. The combined evidence identifies an interface-limited Maxwell--Wagner process: polarization stores the bit, whereas interfacial conductivity determines whether and how fast the states remain capacitively distinguishable.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Ferroelectric capacitor, hafnium zirconium oxide, capacitive memory window, non-destructive readout, Maxwell--Wagner relaxation.
+Ferroelectric capacitor, hafnium zirconium oxide, capacitive memory window, non-destructive readout, Maxwell--Wagner relaxation, IEDM-style conference manuscript.
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -44,7 +50,7 @@ Ferroelectric capacitor, hafnium zirconium oxide, capacitive memory window, non-
 \input{1_mainbody/results}
 
 \section{Conclusion}
-The conference version reduces the manuscript to one governing result: zero-bias capacitive readout in ferroelectric \hzo{} capacitors is limited by an interfacial Maxwell--Wagner relaxation rather than by the ferroelectric's intrinsic switching timescale. The CMW collapses with frequency while a substantial dielectric response remains, its relaxation follows a single-Debye law, and cooling suppresses the read bandwidth far more strongly than switching itself. Because two stacks with nearly identical dielectric ceilings differ by more than two orders of magnitude in relaxation time, the usable NDRO read band is an interface property. Reported CMW values must therefore be tied to measurement frequency and stack design.
+The complete figure set and compressed two-page narrative support the same central conclusion as the full TMAT manuscript. The zero-bias CMW is not governed by the intrinsic ferroelectric timescale alone: its amplitude collapses with frequency while a substantial dielectric response remains, its relaxation follows a single-Debye process, and its bandwidth freezes on cooling much more strongly than polarization switching itself. Because two stacks with nearly identical low-frequency dielectric ceilings differ by more than two orders of magnitude in relaxation time, the usable NDRO read band is set by the interface through a Maxwell--Wagner mechanism. Zero-bias CMW values should therefore be reported together with stack details and measurement frequency.
 
 \bibliographystyle{IEEEtran}
 \bibliography{1_mainbody/references}

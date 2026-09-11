@@ -42,21 +42,19 @@ Y.-C. Luo, J.~Hur, P.~Wang, A.~I. Khan, and S.~Yu, ``Non-volatile, small-signal
   vol. 117, no.~7, p. 073501, 2020.
 
 \bibitem{mukherjee2023iedm}
-S.~Mukherjee \emph{et~al.}, ``Pulse-based capacitive memory window with high
-  non-destructive read endurance in fully beol compatible ferroelectric
-  capacitors,'' in \emph{2023 IEEE International Electron Devices Meeting
-  (IEDM)}, 2023.
+S.~Mukherjee, J.~Bizindavyi, Y.-C. Luo, S.~Clima, J.~Read, M.~I. Popovici,
+  Y.~Xiang, N.~Bazzazian, A.~Belmonte, R.~Delhougne, G.~S. Kar, F.~Catthoor,
+  V.~V. Afanas'ev, S.~Yu, and J.~Van~Houdt, ``Pulse-based capacitive memory
+  window with high non-destructive read endurance in fully beol compatible
+  ferroelectric capacitors,'' in \emph{2023 IEEE International Electron Devices
+  Meeting (IEDM)}, 2023, pp. 1--4.
 
 \bibitem{lee2025aem}
-M.~Lee \emph{et~al.}, ``Experimental demonstration of capacitive in-memory
-  computing using ferroelectric hzo memcapacitors,'' \emph{Advanced Electronic
-  Materials}, vol.~11, p. e00588, 2025.
-
-\bibitem{paul2026wox}
-A.~Paul, S.~De \emph{et~al.}, ``Wox-hzo-peald-tin interface-engineered
-  ferroelectric capacitors with endurance beyond 2e10 cycles,'' in \emph{2026
-  IEEE Symposium on VLSI Technology, Systems and Applications (VLSI-TSA)},
-  2026.
+M.~Lee, H.~Hernandez-Arriaga, D.~M. Narayan, S.~Shirodkar, Y.~C. Jung, D.~N.
+  Le, S.~Park, J.~Kang, S.~Lee, H.~Min, G.~Jang, S.~J. Kim, and J.~Kim,
+  ``Experimental demonstration of capacitive in-memory computing using
+  ferroelectric hzo memcapacitors,'' \emph{Advanced Electronic Materials},
+  vol.~11, no.~20, p. e202500588, 2025.
 
 \bibitem{nicollian1982}
 E.~H. Nicollian and J.~R. Brews, \emph{MOS Physics and Technology}.\hskip 1em
@@ -74,16 +72,6 @@ A.~K. Jonscher, \emph{Dielectric Relaxation in Solids}.\hskip 1em plus 0.5em
 K.~S. Cole and R.~H. Cole, ``Dispersion and absorption in dielectrics. i.
   alternating current characteristics,'' \emph{The Journal of Chemical
   Physics}, vol.~9, no.~4, pp. 341--351, 1941.
-
-\bibitem{das2026cryo}
-A.~Das, S.~De \emph{et~al.}, ``Sub-2 nm equivalent-oxide-thickness
-  ferroelectric transistors for cryogenic memory and computing,'' \emph{ACS
-  Nano}, 2026.
-
-\bibitem{tagantsev2002}
-A.~K. Tagantsev, I.~Stolichnov, N.~Setter, J.~S. Cross, and M.~Tsukada,
-  ``Non-kolmogorov-avrami switching kinetics in ferroelectric thin films,''
-  \emph{Physical Review B}, vol.~66, no.~21, p. 214109, 2002.
 
 \bibitem{alcala2023}
 R.~Alcala, C.~Richter, M.~Materano, P.~D. Lomenzo, C.~Zhou, J.~L. Jones,
