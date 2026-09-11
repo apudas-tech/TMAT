@@ -1,0 +1,31 @@
+Low-frequency noise (LFN) in semiconductor devices arises from carrier number fluctuations ($\Delta N_c$) and mobility fluctuations ($\Delta \mu$). According to the carrier number fluctuation theory, charge trapping and de-trapping at the oxide-semiconductor interface modulate the inversion charge density, affecting the drain current ($I_D$). Additionally, trapped charges induce Coulomb scattering, impacting channel mobility ($\mu$). Consequently, both mechanisms contribute to LFN, with the power spectral density (PSD) of drain current noise ($S_{ID}$) following:
+
+\begin{equation} S_{ID} \propto f^{-\gamma} \label{eqn:SID} \end{equation}
+
+The equivalent input gate voltage noise ($S_{V_g}$) is related to $S_{ID}$ through the transconductance ($g_m$):
+
+\begin{equation} S_{V_g} = \frac{S_{I_D}}{g_m^2} = S_{V_{fb}} \left( 1+\frac{\Omega I_D}{g_m} \right)^{2}, \label{equ:SvG} \end{equation}
+
+where $S_{V_{fb}}$ represents the flat-band voltage fluctuation noise:
+
+\begin{equation} S_{V_{fb}} = \frac{q^2 kT \lambda (N_t+P_{fluc})}{f^{\gamma} W L C_{ox}^2}. \label{equ:flat_band} \end{equation}
+
+Here, $\gamma$ governs the frequency dependence of LFN and is expressed as:
+
+\begin{equation} \gamma = \frac{kT}{q}\frac{\alpha_{sc}C_{ox}}{N_t}. \end{equation}
+
+where $C_{ox}$ is the oxide capacitance, $N_t$ is the bulk oxide trap density, and $P_{fluc}$ accounts for polarization fluctuation noise in ferroelectric materials. The mobility factor $\Omega$ influences $S_{V_g}$ in different noise models, appearing in Hooge’s mobility fluctuation model but absent when charge trapping dominates.
+
+In FeFETs, LFN mechanisms differ from conventional MOSFETs due to ferroelectric polarization. Interface states ($D_{it}$) and oxide traps ($N_t$) contribute to $\Delta N_c$ and $\Delta \mu$, while polarization state fluctuations further modulate trapping-detrapping dynamics. Although charge pumping (CP) can experimentally differentiate $N_t$ from $D_{it}$, this analysis is beyond the scope of this paper.
+
+The Coulomb scattering coefficient ($\alpha_{sc}$) links noise slope $\gamma$ to carrier scattering. A higher $\alpha_{sc}$ in FeFETs suggests stronger charge trapping effects, enhancing mobility fluctuations ($\Delta \mu$). This increased noise is primarily due to Coulomb scattering rather than phonon-lattice interactions. The tunneling attenuation length ($\lambda$) and $C_{ox}$ further modulate LFN behavior. To extract $\alpha_{sc}$, we analyze $\sqrt{S_{V_g}}$ as a function of the drain current-to-transconductance ratio ($I_D/g_m$), following \cite{scattering, scattering2}. The polarization-dependent charge trapping in FeFETs creates distinct LFN characteristics, requiring differentiation between carrier number and mobility fluctuations to optimize performance.
+
+We investigate LFN in $HSO$-FeFETs, correlating it with device reliability and doping ratios. Our findings reveal that increasing $HfO_2$ concentration enhances $S_{ID}$ due to greater carrier trapping. However, the normalized noise ($S_{ID,norm} = S_{ID}/I_D^2$) remains largely invariant across doping levels, indicating stable relative noise characteristics per unit current.
+
+Additionally, we observe superior LFN characteristics in silicon-oxynitride ($SiON$) interfacial layers compared to silicon dioxide ($SiO_2$), particularly in programmed states. This improvement is attributed to reduced $D_{it}$ and better charge confinement in $SiON$. Write cycling shifts the defect distribution from $N_t$ to $D_{it}$, leading to charge trapping and memory window (MW) closure. These findings highlight the importance of defect engineering for endurance enhancement and stable device performance.
+
+Despite extensive FeFET reliability studies, LFN variations under endurance cycling remain underexplored. Our study bridges this gap by examining the interplay between dopant composition, interfacial layer properties, and endurance cycling using a FeFET process compatible with high-k metal gate (HKMG) technology. This ensures a robust comparison of performance metrics and provides insights into FeFET operation and optimization.
+
+Previous works have enhanced FeFET reliability through interfacial layer engineering and material optimization. However, the combined impact of dopants, LFN behavior, and endurance degradation remains largely unaddressed. Unlike studies focusing solely on charge trapping or endurance, we provide a holistic perspective, analyzing how silicon doping in $HfO_2$, interfacial layer composition, and write cycling collectively influence defect dynamics and noise behavior.
+
+By leveraging LFN as a diagnostic tool, we uncover how doping concentrations and interfacial materials affect noise characteristics, revealing critical reliability factors. Our analysis establishes a direct link between endurance cycling and the transition of dominant defect distributions from bulk to interface traps, crucial for FeFET-based memory and neuromorphic applications. These insights extend beyond conventional performance metrics, addressing long-term stability and reliability challenges \cite{Rev2a1,rev211,rev2a3,rev2a4,Rev2a2}.
